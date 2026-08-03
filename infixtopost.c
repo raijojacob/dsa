@@ -1,99 +1,86 @@
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
-#define MAX_SIZE 100
+#define max 100
+char stk[100];
+char post[max];
+int top=-1;
 
-// Global variables
-char stk[MAX_SIZE];
-char postfix[MAX_SIZE];
-int top = -1;
-
-void push(char item) {
-    if (top == MAX_SIZE - 1) {
-        printf("Stack Overflow\n");
-    } else {
-        top = top + 1;
-        stk[top] = item;
+void push(char item){
+    if (top==max-1){
+        printf("overflow stack full");
+    }
+    else{
+        top=top+1;
+        stk[top]=item;
     }
 }
 
-char pop() {
-    if (top == -1) {
-        return '\0'; 
+char pop(){
+    if (top==-1){
+        return '\0';
     }
-    char item = stk[top];
-    top = top - 1;
-    return item;
+    else{
+        char item=stk[top];
+        top=top-1;
+        return item;
+    }
 }
 
-// Function to find Precedence
-int precedence(char n) {
-    switch (n) {
+int precedence(char n){
+    switch (n){
         case '^':
-            return 3;
+        return 3;
         case '*':
         case '/':
-            return 2;
+        return 2;
         case '-':
         case '+':
-            return 1;
+        return 1;
         default:
-            return 0;   
+        return 0;
     }
 }
 
-int main() {
-    int i, j = 0;
-    char infix[MAX_SIZE];
-    
-    printf("Enter Infix Expression: ");
-    scanf("%s", infix);
-    
-    for (i = 0; i < strlen(infix); i++) {
-        switch (infix[i]) {
+void conversion(char inf[100],char post[100]){
+    push('(');
+    int j=0;
+    for (int i=0;i<strlen(inf);i++){
+        switch (inf[i]){
             case '(':
-                push(infix[i]);
-                break;
-                
+            push(inf[i]);
+            break;
             case ')':
-                while (top != -1 && stk[top] != '(') {
-                    postfix[j++] = pop();
-                }
-                pop(); // Pop '(' from stack
-                break;
-                
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-            case '^':
-                // Check right-associativity for '^' vs left-associativity for others
-                if (infix[i] == '^') {
-                    while (top != -1 && precedence(infix[i]) < precedence(stk[top])) {
-                        postfix[j++] = pop();
-                    }
-                } else {
-                    while (top != -1 && precedence(infix[i]) <= precedence(stk[top])) {
-                        postfix[j++] = pop();
-                    }
-                }
-                push(infix[i]);
-                break;
-                
+            while (top!=-1 && stk[top]!='('){
+                post[j++]=pop();
+            }
+            pop();
+            break;
+            case '+':case '-':case '/':case '*':case '^':
+            while (top!=-1 && precedence(inf[i])<=precedence(stk[top])){
+                post[j++]=pop();
+
+            }
+            push(inf[i]);
+            break;
             default:
-                postfix[j++] = infix[i];
-                break;
+            post[j++] = inf[i];
         }
     }
-    
-    while (top != -1) {
-        postfix[j++] = pop();
+    while (top!=-1){
+        char item= pop();
+        if (item!='(') post[j++]=item;
     }
-    
-    // Null-terminate the string so printf knows where it ends
-    //postfix[j] = '\0';
-    
-    printf("Postfix Expression: %s\n", postfix);
+    post[j] = '\0';
+}
+
+int main(){
+    char infix[100];
+    char postfix[100];
+    printf("enter infix expression:");
+    scanf("%s",infix);
+    conversion(infix,postfix);
+    printf("postfix expression: %s\n",postfix);
     return 0;
 }
