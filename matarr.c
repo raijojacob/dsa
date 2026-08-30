@@ -1,8 +1,12 @@
+//raijo jacob
+//cse-b 54
+//sparse matrix operation using array
+
 #include <stdio.h>
 
 int mat1[100][100],mat2[100][100];
 int eff1[100][100],eff2[100][100],r[100][100],tr[100][100];
-
+int flag=0;
 void readmat(int row,int col,int mat[100][100]){
     for (int i=0; i<row; i++){
         for (int j=0; j<col; j++){
@@ -42,6 +46,7 @@ void dispmat(int mat[100][100]){
 void addmat(int mat1[100][100],int mat2[100][100],int r[100][100]){
     if (mat1[0][0]!=mat2[0][0]||mat1[0][1]!=mat2[0][1]){
         printf("dimensions do not match \n");
+        flag=1;
     }
     else{
         r[0][0]=mat1[0][0];
@@ -114,7 +119,7 @@ int main(){
             case 1:
             printf("enter no. of rows and columns for matrix 1:");
             scanf("%d %d", &r1, &c1);
-            printf("Enter the number of rows and columns for the second matrix:\n");
+            printf("enter no. of rows and columns for matrix 2:");
             scanf("%d %d",&r2,&c2);
             printf("--enter elements for martix1--\n");
             readmat(r1, c1, mat1);
@@ -131,8 +136,13 @@ int main(){
             break;
             case 3:
             addmat(eff1,eff2,r);
-            printf("resultant matrix:");
-            dispmat(r);
+            if (flag==0){
+                printf("resultant matrix:");
+                dispmat(r);
+            }
+            else{
+                flag=0;
+            }
             break;
             case 4:
             transpose(eff1,tr);

@@ -1,3 +1,7 @@
+//raijo jacob
+//cse-b 54
+//polynomial operation using linked list
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -69,47 +73,53 @@ int main(){
     int coeff,exp,n;
     char ch;
     do{
+        printf("----------menu----------\n");
         printf("1.enter polynomials.\n");
         printf("2.display the polynomial\n");
         printf("3.add polynomial\n");
-        printf("enter your choice:\n");
+        printf("enter your choice:");
         scanf("%d",&n);
         switch(n){
             case 1:
-                printf("enter no. of terms for 1st polynomial: ");
-                int t1;
-                scanf("%d",&t1);
-                for(int i=0;i<t1;i++){
-                    printf("enter %d coefficient and exponet: ",i+1);
-                    scanf("%d %d",&coeff,&exp);
-                    insert(&h1,coeff,exp);
-                }
-                printf("enter no. of terms for 2nd polynomial: ");
-                int t2;
-                scanf("%d",&t2);
-                for(int i=0;i<t2;i++){
-                    printf("enter %d coefficient and exponent : ",i+1);
-                    scanf("%d %d",&coeff,&exp);
-                    insert(&h2,coeff,exp);
-                }
-                break;
-            case 2:
-                printf("polynomial 1: ");
-                display(h1);
-                printf("\npolynomial 2: ");
-                display(h2);
-                break;
-            case 3:
-                add(h1,h2,&h3);
-                printf("reuslt: ");
-                display(h3);
-                break;
-            default:
-                printf("enter valid choice\n");
+            printf("enter no. of terms for 1st polynomial: ");
+            int t1;
+            scanf("%d",&t1);
+            for(int i=0;i<t1;i++){
+                printf("enter %d coefficient and exponet: ",i+1);
+                scanf("%d %d",&coeff,&exp);
+                insert(&h1,coeff,exp);
             }
+            printf("enter no. of terms for 2nd polynomial: ");
+            int t2;
+            scanf("%d",&t2);
+            for(int i=0;i<t2;i++){
+                printf("enter %d coefficient and exponent : ",i+1);
+                scanf("%d %d",&coeff,&exp);
+                insert(&h2,coeff,exp);
+            }
+            break;
+    
+            case 2:
+            printf("polynomial 1: ");
+            display(h1);
+            printf("\npolynomial 2: ");
+            display(h2);
+            break;
+            
+            case 3:
+            add(h1,h2,&h3);
+            printf("reuslt: ");
+            display(h3);
+            break;
+        
+            default:
+            printf("enter valid choice\n");
+    
+        }
+            printf("------------------------\n");
             printf("want to continue?(y/n):");
             scanf(" %c",&ch);
-        } while (ch=='y'||ch=='Y');
+        } while (ch=='y');
     return 0;  
 
 }
