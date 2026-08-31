@@ -48,6 +48,4 @@ void deqf(){
 } else {}
 }
 
-void deqend(){
 
-}
