@@ -40,8 +40,8 @@ void dfs(int adj[max][max],int v,int cur, int visited[max]) {
     printf("%d ", cur);
 
     for (int i = 0; i < v; i++) {
-        if (adj[cur][i] == 1 && !visited[i]) {
-            dfs(adj, v, i, visited);
+        if (adj[cur][i]==1&&!visited[i]) {
+            dfs(adj,v,i,visited);
         }
     }
 }

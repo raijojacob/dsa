@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include <string.h>
+#include<string.h>
 
 struct node{
         char data[100];
@@ -56,7 +56,7 @@ void back(){
 void forward(){
         if (cur!=NULL && cur->next!=NULL) {
                 cur=cur->next;
-                printf("moved forward to wrl: %s\n",cur->data);
+                printf("moved forward to url: %s\n",cur->data);
         }else{
                 printf("no url infront...\n");
         }
